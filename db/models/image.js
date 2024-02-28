@@ -1,3 +1,5 @@
+const fs = require("fs/promises");
+const path = require("path");
 const {
   Model,
 } = require('sequelize');
@@ -19,6 +21,12 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Image',
+    hooks: {
+      afterDestroy: async (image, options) => {
+        console.log(`removing ${path.resolve("public", image.path)}`);
+        await fs.unlink(path.resolve("public", image.path));
+      }
+    }
   });
   return Image;
 };
