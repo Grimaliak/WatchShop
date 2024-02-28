@@ -9,6 +9,7 @@ import apiRouter from './routes/apiRouter';
 import resLocals from './middlewares/resLocals';
 import apiClientRouter from './routes/apiClientsRouter';
 import apiWatchesRouter from './routes/apiWatchesRouter';
+import apiAdminsRouter from './routes/apiAdminsRouter'
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -23,6 +24,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(resLocals);
+
+app.use('/', apiAdminsRouter);
 
 app.use('/', indexRouter);
 app.use('/api', apiRouter);
