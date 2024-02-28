@@ -7,6 +7,7 @@ import jsxRender from './utils/jsxRender';
 import indexRouter from './routes/indexRouter';
 import apiRouter from './routes/apiRouter';
 import resLocals from './middlewares/resLocals';
+import apiAdminsRouter from './routes/apiAdminsRouter'
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -21,6 +22,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(resLocals);
+
+app.use('/', apiAdminsRouter);
 
 app.use('/', indexRouter);
 app.use('/api', apiRouter);
