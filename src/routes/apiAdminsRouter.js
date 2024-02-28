@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import bcrypt from 'bcrypt';
 import { Admin } from '../../db/models'; 
-import generateTokens from '../../utils/generateTokens';
-import cookieConfig from '../../config/cookieConfig';
+import generateTokens from '../utils/generateTokens';
+import cookieConfig from '../config/cookiesConfig';
 
 const apiAdminsRouter = Router();
 
@@ -39,7 +39,7 @@ apiAdminsRouter.post('/api/admin-login', async (req, res) => {
   }
 });
 
-apiAdminsRouter.get('/api/admin-logoutadmin-logout', (req, res) => {
+apiAdminsRouter.get('/api/admin-logout', (req, res) => {
   res.clearCookie('accessToken').clearCookie('refreshToken').sendStatus(200);
 });
 
