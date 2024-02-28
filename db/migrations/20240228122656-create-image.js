@@ -10,15 +10,13 @@ module.exports = {
       },
       path: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: false,
       },
       watch_id: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Watches',
-          key: 'id',
         },
-        allowNull: true,
         onDelete: 'CASCADE',
       },
       createdAt: {

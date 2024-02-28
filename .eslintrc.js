@@ -22,5 +22,6 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'react/no-danger': 'off',
     'no-console': 'off',
+    'linebreak-style': 'windows',
   },
 };
