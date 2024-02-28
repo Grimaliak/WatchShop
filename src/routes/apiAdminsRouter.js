@@ -27,11 +27,11 @@ apiAdminsRouter.post('/api/admin-login', async (req, res) => {
     }
 
     const adminInfo = { id: admin.id, login: admin.login };
-    const { access, refresh } = generateTokens({ admin: adminInfo });
+    const { accessToken, refreshToken } = generateTokens({ admin: adminInfo });
 
     res
-      .cookie('accessToken', access, cookieConfig.access)
-      .cookie('refreshToken', refresh, cookieConfig.refresh)
+      .cookie('accessToken', accessToken, cookieConfig.access)
+      .cookie('refreshToken', refreshToken, cookieConfig.refresh)
       .sendStatus(200);
   } catch (error) {
     console.error('Error during admin login:', error);

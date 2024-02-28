@@ -26,7 +26,6 @@ app.use(cookieParser());
 app.use(resLocals);
 
 app.use('/', apiAdminsRouter);
-
 app.use('/', indexRouter);
 app.use('/api', apiRouter);
 app.use('/api/clients', apiClientRouter);

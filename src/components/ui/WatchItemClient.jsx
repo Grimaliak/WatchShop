@@ -1,7 +1,7 @@
 import React from 'react';
 import { Carousel, Card, Row, Col } from 'react-bootstrap';
 
-export default function WatchItemClient() {
+export default function WatchItemClient({ watch }) {
   return (
     <Row>
       <Col sm={6}>
