@@ -1,5 +1,10 @@
 import React from 'react';
+import Hero from '../ui/Hero';
 
 export default function IndexPage({ hello }) {
-  return <div>Hello, {hello}</div>;
+  return (
+    <>
+      <Hero />
+    </>
+  );
 }
