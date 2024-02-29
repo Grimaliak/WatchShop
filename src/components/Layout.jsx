@@ -13,6 +13,7 @@ export default function Layout({ children, initState }) {
           crossOrigin="anonymous"
         />
         <link rel="stylesheet" href="styles/index.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet" />
         <script defer src="/app.js" />
         <script defer src="/vendor.js" />
         <script
