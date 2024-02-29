@@ -1,3 +1,10 @@
+
+
+body {
+  color: white;
+  background: black;
+}
+
 .vano-image-uploader {
   display: block;
 }
@@ -12,7 +19,7 @@
 
 .vano-image-uploader .vano-drag-and-drop-box {
   height: 150px;
-  background: #f5f4ea;
+  background: #ffffff3a;
   border-radius: 4px;
   border: 1px dashed rgb(184, 175, 175);
   position: relative;
@@ -76,6 +83,9 @@
   scale: 1.1;
 }
 
-[type=button], [type=reset], [type=submit], button {
-  background-color: var(--bs-btn-bg) !important;
+
+.vano-parallax-inner {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }

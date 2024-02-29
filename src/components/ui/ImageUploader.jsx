@@ -8,7 +8,7 @@ import { BsCloudUpload } from "react-icons/bs";
  * @param {{ value: File[], onChange: (newValue: File[] | (prev: File[]) => File[]) => void }} param0
  * @returns
  */
-export default function ImageUploader({ value, onChange, ...divProps }) {
+export default function ImageUploader({ value, onChange, rootProps, ...inputProps }) {
   const handleChange = (event) => {
     const files = [...event.target.files];
     onChange((prev) => {
@@ -27,10 +27,10 @@ export default function ImageUploader({ value, onChange, ...divProps }) {
   }, [value]);
 
   return (
-    <div {...divProps} className={clsx('vano-image-uploader', divProps.className)}>
+    <div {...rootProps} className={clsx('vano-image-uploader', rootProps?.className)}>
       <div>
         <div className="vano-drag-and-drop-box">
-          <div className="vano-drag-and-drop-text flex flex-col gap-2 align-center">
+          <div className="vano-drag-and-drop-text d-flex flex-column gap-2 align-items-center">
             <span>
 
             Upload images
@@ -38,6 +38,7 @@ export default function ImageUploader({ value, onChange, ...divProps }) {
             <BsCloudUpload style={{ fontSize: '50px' }} />
           </div>
           <input
+            {...inputProps}
             className="vano-drag-and-drop-input"
             type="file"
             onChange={handleChange}
@@ -45,14 +46,14 @@ export default function ImageUploader({ value, onChange, ...divProps }) {
           />
         </div>
         {normalizedImages.map((normalizedImage, i) => (
-          <div className="vano-image-uploader-item" key={normalizedImage.name}>
+          <div className="vano-image-uploader-item" key={normalizedImage.file.name}>
             <img
               className="vano-image-uploader-item-image"
               src={normalizedImage.base64Str}
               style={{ width: '100px', height: '100px', objectFit: 'contain' }}
             />
             <div className="vano-image-uploader-item-right">
-              <div className="flex justify-between gap-2">
+              <div className="d-flex justify-content-between gap-2">
                 <strong>{normalizedImage.file.name}</strong>
                 <BsFillTrash3Fill
                   onClick={() => handleDelete(i)}

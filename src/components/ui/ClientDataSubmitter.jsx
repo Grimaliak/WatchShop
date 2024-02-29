@@ -46,7 +46,7 @@ export default function ClientDataSubmitter(props) {
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <ImageUploader value={files} onChange={setFiles} />
+          <ImageUploader value={files} onChange={setFiles} name="blueprints" />
         </Form.Group>
 
         <Form.Group className="flex justify-end">
