@@ -30,7 +30,7 @@ export default function IndexPage({ watches, user }) {
           {watches?.map((watch) => (
             <WatchItemClient key={watch.id} watch={watch} />
           ))}
-          <ClientDataSubmitter />
+          <ClientDataSubmitter className="mb-3" />
         </>
       )}
     </>

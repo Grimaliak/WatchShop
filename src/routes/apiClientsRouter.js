@@ -2,16 +2,19 @@ import express from 'express';
 import upload from '../utils/upload';
 import { Client, Blueprint } from '../../db/models';
 import { verifyAccessToken } from '../middlewares/verifyTokens';
+import sendEmailNotification from '../utils/sendEmailNotification';
 
 const apiClientRouter = express.Router();
 
 apiClientRouter.post('/', upload.array('blueprints'), async (req, res) => {
   try {
-    const files = req.files;
+    const { files } = req;
     const { name, phone, email } = req.body;
+
     if (!name) throw new Error('Name is required');
     if (!phone) throw new Error('Phone is required');
     if (!email) throw new Error('Email is required');
+
     const [client, created] = await Client.findOrCreate({
       where: { email },
       include: Blueprint,
@@ -21,9 +24,12 @@ apiClientRouter.post('/', upload.array('blueprints'), async (req, res) => {
       await Promise.all(client.Blueprints.map((blueprint) => blueprint.destroy()))
     }
     const blueprints = await Blueprint.bulkCreate(
-      files.map((file) => ({ path: 'uploaded-images/' + file.filename })),
+      files.map((file) => ({ path: `uploaded-images/${file.filename}` })),
     );
-    await client.addBlueprints(blueprints); // adds blueprints to client
+    await client.addBlueprints(blueprints);
+
+    await sendEmailNotification(email, name);
+
     res.sendStatus(200);
   } catch (error) {
     console.log(error);
@@ -32,8 +38,13 @@ apiClientRouter.post('/', upload.array('blueprints'), async (req, res) => {
 });
 
 apiClientRouter.get('/', verifyAccessToken, async (req, res) => {
-  const clients = await Client.findAll({ attributes: ['name', 'phone', 'email'] });
-  res.json(clients);
+  try {
+    const clients = await Client.findAll({ attributes: ['name', 'phone', 'email'] });
+    res.json(clients);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json(error.message);
+  }
 });
 
 export default apiClientRouter;

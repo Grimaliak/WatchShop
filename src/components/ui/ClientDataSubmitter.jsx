@@ -5,48 +5,55 @@ import Form from 'react-bootstrap/Form';
 import ImageUploader from './ImageUploader';
 import { toast } from 'react-toastify';
 
-export default function ClientDataSubmitter() {
-
-  const [files, setFiles] = useState([])
+export default function ClientDataSubmitter(props) {
+  const [files, setFiles] = useState([]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     files.forEach((file) => {
       formData.append('blueprints', file);
-    })
-    const res = await fetch("/api/clients", { method: "POST", body: formData });
+    });
+    const res = await fetch('/api/clients', { method: 'POST', body: formData });
     if (res.ok) {
-      toast("success")
+      toast('Ваша заявка принята, проверьте почту');
+      event.target.reset();
+      setFiles([]);
     } else {
-      toast("failure")
+      toast(
+        `Не удалось отправить заявку, статус ${res.status} ${res.statusText} ${await res.text()}`,
+      );
     }
     console.log(Object.fromEntries(formData));
   };
 
   return (
-    <Container>
+    <Container {...props}>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Имя</Form.Label>
-          <Form.Control type="text" placeholder="Имя" name="name" />
+          <Form.Label>Name</Form.Label>
+          <Form.Control type="text" placeholder="Name" name="name" />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Номер телефона</Form.Label>
-          <Form.Control type="text" placeholder="Телефон" name="phone" />
+          <Form.Label>Phone</Form.Label>
+          <Form.Control type="text" placeholder="Phone" name="phone" />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Почта</Form.Label>
-          <Form.Control type="email" placeholder="Почта" name="email" />
+          <Form.Label>Email</Form.Label>
+          <Form.Control type="email" placeholder="Email" name="email" />
         </Form.Group>
 
-        <ImageUploader value={files} onChange={setFiles} />
+        <Form.Group className="mb-3">
+          <ImageUploader value={files} onChange={setFiles} />
+        </Form.Group>
 
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
+        <Form.Group className="flex justify-end">
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </Form.Group>
       </Form>
     </Container>
   );

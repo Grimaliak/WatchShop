@@ -33,7 +33,7 @@ export default function ImageUploader({ value, onChange, ...divProps }) {
           <div className="vano-drag-and-drop-text flex flex-col gap-2 align-center">
             <span>
 
-            Загрузите изображения
+            Upload images
             </span>
             <BsCloudUpload style={{ fontSize: '50px' }} />
           </div>
