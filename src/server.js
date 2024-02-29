@@ -14,16 +14,16 @@ import apiAdminsRouter from './routes/apiAdminsRouter'
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-app.engine('jsx', jsxRender);
-app.set('view engine', 'jsx');
-app.set('views', path.join(__dirname, 'components', 'pages'));
-
 app.use(express.static('public'));
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(resLocals);
+
+app.engine('jsx', jsxRender);
+app.set('view engine', 'jsx');
+app.set('views', path.join(__dirname, 'components', 'pages'));
 
 app.use('/', apiAdminsRouter);
 app.use('/', indexRouter);

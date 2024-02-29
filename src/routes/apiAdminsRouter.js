@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import bcrypt from 'bcrypt';
-import { Admin } from '../../db/models'; 
+import { Admin } from '../../db/models';
 import generateTokens from '../utils/generateTokens';
 import cookieConfig from '../config/cookiesConfig';
 
@@ -26,8 +26,7 @@ apiAdminsRouter.post('/api/admin-login', async (req, res) => {
       return res.status(401).json({ message: 'Incorrect password' });
     }
 
-    const adminInfo = { id: admin.id, login: admin.login };
-    const { accessToken, refreshToken } = generateTokens({ admin: adminInfo });
+    const { accessToken, refreshToken } = generateTokens({ user: admin });
 
     res
       .cookie('accessToken', accessToken, cookieConfig.access)

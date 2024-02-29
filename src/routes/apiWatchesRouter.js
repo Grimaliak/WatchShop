@@ -7,7 +7,7 @@ const apiWatchesRouter = express.Router();
 apiWatchesRouter.get('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const watch = await Watch.findByPk(id);
+    const watch = await Watch.findByPk(id, { include: Image });
     if (!watch) return res.status(404).json('Watch not found');
     res.json(watch.get());
   } catch (error) {
@@ -27,7 +27,8 @@ apiWatchesRouter.post('/', upload.array('images', 10), async (req, res) => {
       files.map((file) => ({ path: 'uploaded-images/' + file.filename })),
     );
     await watch.addImages(images);
-    res.json(watch.get());
+    const newWatch = await Watch.findByPk(watch.id, { include: Image });
+    res.json(newWatch.get());
   } catch (error) {
     console.log(error.message);
     res.status(500).json(error.message);
@@ -48,6 +49,7 @@ apiWatchesRouter.put('/:id', upload.array('images', 10), async (req, res) => {
       files.map((file) => ({ path: 'uploaded-images/' + file.filename })),
     );
     Object.assign(watch, { name, description });
+    await watch.save();
     await watch.addImages(images);
     const newWatch = await Watch.findByPk(watch.id, { include: Image });
     res.json(newWatch.get());

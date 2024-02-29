@@ -15,9 +15,7 @@ export default function IndexPage({ watches, user }) {
 
   return (
     <>
-      <span>{JSON.stringify(user)}</span>
-
-      {!user ? (
+      {user ? (
         <>
           <Hero />
           <span>admin defined</span>

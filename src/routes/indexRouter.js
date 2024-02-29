@@ -1,16 +1,20 @@
 import express from 'express';
-import { Watch } from '../../db/models'
+import { Watch, Image } from '../../db/models';
 
 const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    const watches = await Watch.findAll();
+    const watches = await Watch.findAll({ include: Image });
     res.render('IndexPage', { watches });
   } catch (error) {
     console.log(error.message);
     res.status(500).json(error.message);
   }
+});
+
+router.get('/test', async (req, res) => {
+  res.render('TestPage');
 });
 
 router.get('/admin-login', async (req, res) => {
