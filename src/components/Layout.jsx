@@ -12,10 +12,16 @@ export default function Layout({ children, initState }) {
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
           crossOrigin="anonymous"
         />
+        <link
+          href="
+          https://cdn.jsdelivr.net/npm/react-toastify@10.0.4/dist/ReactToastify.min.css
+          "
+          rel="stylesheet"
+        />
         <link rel="stylesheet" href="styles/index.css" />
+        <script src="https://cdn.tailwindcss.com" />
         <script defer src="/app.js" />
         <script defer src="/vendor.js" />
-        <script src="https://cdn.tailwindcss.com" />
         <script
           type="text/javascript"
           dangerouslySetInnerHTML={{

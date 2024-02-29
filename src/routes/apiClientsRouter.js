@@ -14,15 +14,19 @@ apiClientRouter.post('/', upload.array('blueprints'), async (req, res) => {
     if (!email) throw new Error('Email is required');
     const [client, created] = await Client.findOrCreate({
       where: { email },
+      include: Blueprint,
       defaults: { name, phone, email },
     });
+    if (!created) {
+      await Promise.all(client.Blueprints.map((blueprint) => blueprint.destroy()))
+    }
     const blueprints = await Blueprint.bulkCreate(
       files.map((file) => ({ path: 'uploaded-images/' + file.filename })),
     );
     await client.addBlueprints(blueprints); // adds blueprints to client
     res.sendStatus(200);
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
     res.status(500).json(error.message);
   }
 });

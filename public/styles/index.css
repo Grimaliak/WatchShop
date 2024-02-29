@@ -1,9 +1,5 @@
 .vano-image-uploader {
-  padding: 10px;
-  border: 1px solid #d4d4d4;
-  border-radius: 4px;
-  margin: 5px;
-  max-width: 500px;
+  display: block;
 }
 
 .vano-image-uploader input[type=file]::file-selector-button {
@@ -78,4 +74,8 @@
 
 .vano-image-uploader-trash-delete-icon:hover {
   scale: 1.1;
+}
+
+[type=button], [type=reset], [type=submit], button {
+  background-color: var(--bs-btn-bg) !important;
 }
