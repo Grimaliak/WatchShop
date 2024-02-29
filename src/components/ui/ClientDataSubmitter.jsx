@@ -30,17 +30,17 @@ export default function ClientDataSubmitter(props) {
   return (
     <Container {...props}>
       <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="mb-3" controlId="name">
           <Form.Label>Name</Form.Label>
           <Form.Control type="text" placeholder="Name" name="name" />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="mb-3" controlId="phone">
           <Form.Label>Phone</Form.Label>
           <Form.Control type="text" placeholder="Phone" name="phone" />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="mb-3" controlId="email">
           <Form.Label>Email</Form.Label>
           <Form.Control type="email" placeholder="Email" name="email" />
         </Form.Group>
