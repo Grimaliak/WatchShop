@@ -2,6 +2,7 @@ import React from 'react';
 import Hero from '../ui/Hero';
 import WatchItemClient from '../ui/WatchItemClient';
 import WatchItemAdmin from '../ui/WatchItemAdmin';
+import ClientDataSubmitter from '../ui/ClientDataSubmitter';
 
 export default function IndexPage({ watches, user }) {
 
@@ -29,6 +30,7 @@ export default function IndexPage({ watches, user }) {
           {watches?.map((watch) => (
             <WatchItemClient key={watch.id} watch={watch} />
           ))}
+          <ClientDataSubmitter />
         </>
       )}
     </>
