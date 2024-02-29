@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 
 const centerStyles = {
-  height: '100vh', // Центрирование по вертикали на всю высоту окна
+  height: '70vh', // Центрирование по вертикали на всю высоту окна
   display: 'flex',
   alignItems: 'flex-start',
   justifyContent: 'center',
@@ -20,10 +20,14 @@ const centeredContent = {
   height: '100%',
 };
 
+const transparentBackground = {
+  backgroundColor: 'rgba(255, 255, 255, 0.5)', // Прозрачный белый цвет для фона
+};
+
 function Hero() {
   return (
     <div style={centerStyles}>
-      <Card className="hero-content" style={fullWidth}>
+      <Card className="hero-content" style={{ ...fullWidth, ...transparentBackground }}>
         <Card.Body style={centeredContent}>
           <Card.Title>Знаковые часы для вашего стиля</Card.Title>
           <Card.Text>
