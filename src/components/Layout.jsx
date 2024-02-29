@@ -15,6 +15,7 @@ export default function Layout({ children, initState }) {
         <link rel="stylesheet" href="styles/index.css" />
         <script defer src="/app.js" />
         <script defer src="/vendor.js" />
+        <script src="https://cdn.tailwindcss.com" />
         <script
           type="text/javascript"
           dangerouslySetInnerHTML={{
