@@ -29,6 +29,7 @@ app.use('/', apiAdminsRouter);
 app.use('/', indexRouter);
 app.use('/api', apiRouter);
 app.use('/api/clients', apiClientRouter);
-app.use("/api/watches", apiWatchesRouter);
+app.use('/api/watches', apiWatchesRouter);
+app.use('*', (req, res,) => res.render('NotFoundPage'))
 
 app.listen(PORT, () => console.log(`App has started on port ${PORT}`));

@@ -4,13 +4,14 @@ import { Container, Row, Col } from 'react-bootstrap';
 const footerStyles = {
   backgroundColor: '#333',
   color: '#fff',
-  padding: '20px',
+  padding: '10px',
 };
 
 const iconStyles = {
   width: '30px',
   height: '30px',
   marginRight: '10px',
+  filter: 'invert(1)',
 };
 
 function Footer() {
@@ -21,8 +22,9 @@ function Footer() {
           <Col md={12}>
             <div>Контактная информация: yourbestwatch@gmail.com</div>
           </Col>
-          <Col md={12} className="text-right">
-            <a href="/">
+          <Col md={12} className="mt-3 text-right" >
+
+            <a style={{marginRight: "20px"}} href="/">
               <img
                 src="telegram_icon.png"
                 alt="Telegram"

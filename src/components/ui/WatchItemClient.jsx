@@ -17,14 +17,17 @@ export default function WatchItemClient({ watch }) {
           ))}
         </Carousel>
         <div
-          style={{ flex: '1', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
+          style={{flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', overflow: 'hidden' }}
         >
           <Card.Body style={{ textAlign: 'center', overflow: 'auto' }}>
-            <Card.Title>{watch.name}</Card.Title>
-            <Card.Text>{watch.description}</Card.Text>
+            <Card.Title style={{ fontFamily: 'Cinzel, serif', fontSize: '50px', marginBottom: "20px" }}>{watch.name}</Card.Title>
+            <Card.Text className="sanya-description-card">sdfghjdfghjksdfghjkdfghjkdsfghjkfghjfghjkdfghjdfghjkdfghjxcvbnmdfghjikdfghjkdfghjkdfghjkdfghjkdcfvghjdcfvghjxdcfvghjdfghjiedrftgyhuifghjkldcfvghjkcfghj</Card.Text>
           </Card.Body>
         </div>
       </Stack>
     </Card>
   );
 }
+
+
+// {watch.description}
