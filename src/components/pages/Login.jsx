@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React from 'react'
+import React from 'react';
 
 export default function Login() {
 
@@ -15,10 +15,12 @@ export default function Login() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" name="login" />
-      <input type="password" name="password" />
-      <button>login</button>
+    <div className="login-container">
+    <form onSubmit={handleSubmit} className="login-form">
+      <input type="text" name="login" placeholder="Admin name" className="login-input"/>
+      <input type="password" name="password" placeholder="Admin password" className="login-input"/>
+      <button type="submit" className="login-butoon">login</button>
     </form>
+    </div>
   )
 }
