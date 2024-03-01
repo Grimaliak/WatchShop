@@ -21,4 +21,10 @@ router.get('/admin-login', async (req, res) => {
   res.render('Login');
 });
 
+router.get('/admin-logout', async (req, res) => {
+  res.clearCookie("accessToken");
+  res.clearCookie("refreshToken");
+  res.redirect("/");
+});
+
 export default router;

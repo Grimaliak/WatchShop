@@ -1,86 +1,136 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Button, Col, Form, Row, Stack } from 'react-bootstrap';
 import ImageUploader from './ImageUploader';
 
 export default function WatchItemAdmin({ onDelete, onSubmit, watch }) {
-  const [loadingFiles, setLoadingFiles] = useState(false);
-  const [files, setFiles] = useState([]);
+  const [loadingImages, setLoadingImages] = useState(true);
+  const [initialImages, setInitialImages] = useState([]);
+  const [input, setInput] = useState({
+    images: [],
+    name: watch.name,
+    description: watch.description,
+  });
+
+  const handleChange = (event) => {
+    setInput((prev) => ({
+      ...prev,
+      [event.target.name]: event.target.value,
+    }));
+  };
+
+  const images = useMemo(() => input.images, [input.images]);
+
+  const setFiles = (newImages) => {
+    setInput((prev) => ({
+      ...prev,
+      images: typeof newImages === 'function' ? newImages(prev.images) : newImages,
+    }));
+  };
+
+  const isChanged = useMemo(() => {
+    const inputImageNames = [...new Set(input.images.map((image) => image.name))];
+    const savedImageNames = [...new Set(watch.Images.map((image) => image.name))];
+    return (
+      input.name !== watch.name ||
+      input.description !== watch.description ||
+      inputImageNames.length !== savedImageNames.length ||
+      inputImageNames.some((name) => !savedImageNames.includes(name))
+    );
+  }, [input, watch]);
+
+  // -------------------------------- HANDLERS --------------------------------------
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
-    files.forEach((file) => {
+    images.forEach((file) => {
       formData.append('images', file);
     });
-    console.log(Object.fromEntries(formData));
     onSubmit(watch.id, formData);
   };
 
-  const handleDelete = (event) => {
+  const handleDelete = () => {
     onDelete(watch.id);
   };
 
-  const handleCancel = (event) => {
-    console.log('cancel success');
+  const handleCancel = () => {
+    setInput({
+      images: initialImages,
+      name: watch.name,
+      description: watch.description,
+    });
   };
 
+  // ---------------------- USE EFFECTS ----------------------------
+  
+  // loading images as File blobs and reset input
   useEffect(() => {
-    setLoadingFiles(true);
     Promise.all(
       watch.Images.map((image) => {
         return fetch(image.path)
           .then((res) => res.blob())
           .then((blob) => new File([blob], image.name));
       }),
-    ).then((files) => {
-      setFiles(files);
-    })
-    .catch(console.log)
-    .finally(() => {
-      setLoadingFiles(false);
-    })
-  }, []);
+    )
+      .then((files) => {
+        setInitialImages(files);
+        setInput({
+          images: files,
+          name: watch.name,
+          description: watch.description,
+        });
+      })
+      .catch(console.log)
+      .finally(() => {
+        setLoadingImages(false);
+      });
+  }, [watch]);
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Row className="mb-3">
-        <Col className="d-flex flex-column justify-content-between align-items-center">
-          <Form.Group controlId="formFile" className="mb-3 w-100">
+      <Row>
+        <Col>
+          <Form.Group className="mb-3 w-100">
             <Form.Label>Загрузка фотографий</Form.Label>
-            <ImageUploader
-              isLoading={loadingFiles}
-              value={files}
-              onChange={setFiles}
-              rootProps={{ style: { width: '100%' } }}
-            />
+            {images && (
+              <ImageUploader
+                isLoading={loadingImages}
+                value={images}
+                onChange={setFiles}
+                rootProps={{ style: { width: '100%' } }}
+              />
+            )}
           </Form.Group>
-          <div>
-            <Button variant="secondary" active onClick={handleDelete}>
-              Удалить часы
-            </Button>
-          </div>
         </Col>
 
-        <Col className="pr-3">
+        <Col>
           <Form.Group controlId="name">
-            <Form.Label>Название</Form.Label>
-            <Form.Control type="text" name="name" defaultValue={watch.name} />
+            <Form.Label>Name</Form.Label>
+            <Form.Control type="text" name="name" value={input.name} onChange={handleChange} />
           </Form.Group>
           <Form.Group className="mb-3" controlId="description">
-            <Form.Label>Описание</Form.Label>
+            <Form.Label>Description</Form.Label>
             <Form.Control
               name="description"
               as="textarea"
               rows={3}
-              defaultValue={watch.description}
+              value={input.description}
+              onChange={handleChange}
             />
           </Form.Group>
           <Stack direction="horizontal" gap={2}>
-            <Button variant="primary" active onClick={handleCancel}>
-              Отменить изменения
-            </Button>
-            <Button variant="secondary" active type="submit">
-              Сохранить изменения
+            {isChanged && (
+              <>
+                <Button variant="primary" active onClick={handleCancel}>
+                  Cancel
+                </Button>
+                <Button variant="secondary" active type="submit">
+                  Save
+                </Button>
+              </>
+            )}
+            <Button variant="danger" active onClick={handleDelete}>
+              Delete
             </Button>
           </Stack>
         </Col>

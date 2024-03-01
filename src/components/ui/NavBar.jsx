@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
-export default function NavBar() {
+export default function NavBar({ user }) {
   return (
     <Navbar bg="dark" data-bs-theme="dark">
       <Container>
@@ -13,6 +13,12 @@ export default function NavBar() {
           <Nav.Link href="#features">Якорь 2</Nav.Link>
           <Nav.Link href="#pricing">Якорь 3</Nav.Link>
         </Nav>
+        {user && (
+          <Nav.Link href="/admin-logout">Logout</Nav.Link>
+        )}
+        {!user && (
+          <Nav.Link href="/admin-login">Login as admin</Nav.Link>
+        )}
       </Container>
     </Navbar>
   );

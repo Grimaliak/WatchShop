@@ -7,7 +7,7 @@ import { Parallax } from 'react-parallax';
 
 const backgroundImage = 'background.jpeg';
 
-export default function App({ children }) {
+export default function App({ children, user }) {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
@@ -41,7 +41,7 @@ export default function App({ children }) {
               backgroundSize: 'contain', // Оптимальный размер изображения для предотвращения потери качества
             }}
           >
-            <NavBar />
+            <NavBar user={user} />
             <div style={{ flexGrow: 1 }}>{children}</div>
             <Footer />
           </Parallax>
