@@ -96,6 +96,7 @@ body {
   height: 250px;
   aspect-ratio: 1;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .vano-watch-carousel .carousel-inner {
@@ -163,4 +164,13 @@ body {
 
 .login-butoon:hover {
   background-color: #0056b3;
+}
+
+.sanya-description-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+  overflow: hidden;
+  font-family: 'Cinzel, serif';
 }

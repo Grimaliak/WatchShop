@@ -26,7 +26,6 @@ const Hero = () => {
             </animated.span>
           ))}
         </Card.Title>
-        {/* <Button variant="primary">Explore Collection</Button> */}
       </Card.Body>
     </Card>
   );
