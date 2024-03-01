@@ -28,7 +28,7 @@ export default function ClientDataSubmitter(props) {
   };
 
   return (
-    <Container {...props}>
+    <div {...props}>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="name">
           <Form.Label>Name</Form.Label>
@@ -49,12 +49,12 @@ export default function ClientDataSubmitter(props) {
           <ImageUploader value={files} onChange={setFiles} name="blueprints" />
         </Form.Group>
 
-        <Form.Group className="flex justify-end">
+        <Form.Group className="d-flex justify-content-end">
           <Button variant="primary" type="submit">
             Submit
           </Button>
         </Form.Group>
       </Form>
-    </Container>
+    </div>
   );
 }

@@ -14,10 +14,7 @@ const Hero = () => {
   });
 
   return (
-    <Card
-      className="hero-content"
-      style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)', margin: '20px 0px', height: '100dvh' }}
-    >
+    <Card className="vano-hero-content">
       <Card.Body>
         <Card.Title style={{ fontFamily: 'Cinzel, serif' }}>
           {trail.map(({ x, opacity }, index) => (
@@ -29,7 +26,7 @@ const Hero = () => {
             </animated.span>
           ))}
         </Card.Title>
-        <Button variant="primary">Explore Collection</Button>
+        {/* <Button variant="primary">Explore Collection</Button> */}
       </Card.Body>
     </Card>
   );

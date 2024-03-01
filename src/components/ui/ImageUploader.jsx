@@ -8,7 +8,7 @@ import { BsCloudUpload } from "react-icons/bs";
  * @param {{ value: File[], onChange: (newValue: File[] | (prev: File[]) => File[]) => void }} param0
  * @returns
  */
-export default function ImageUploader({ value, onChange, rootProps, ...inputProps }) {
+export default function ImageUploader({ value, onChange, isLoading, rootProps, ...inputProps }) {
   const handleChange = (event) => {
     const files = [...event.target.files];
     onChange((prev) => {
@@ -40,12 +40,16 @@ export default function ImageUploader({ value, onChange, rootProps, ...inputProp
           <input
             {...inputProps}
             className="vano-drag-and-drop-input"
+            title={value.map((file) => file.name).join('\n')}
             type="file"
             onChange={handleChange}
             multiple={true}
           />
         </div>
-        {normalizedImages.map((normalizedImage, i) => (
+        {isLoading && (
+          <div>Loading</div>
+        )}
+        {!isLoading && normalizedImages.map((normalizedImage, i) => (
           <div className="vano-image-uploader-item" key={normalizedImage.file.name}>
             <img
               className="vano-image-uploader-item-image"

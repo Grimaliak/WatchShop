@@ -1,5 +1,3 @@
-
-
 body {
   color: white;
   background: black;
@@ -9,11 +7,11 @@ body {
   display: block;
 }
 
-.vano-image-uploader input[type=file]::file-selector-button {
+.vano-image-uploader input[type='file']::file-selector-button {
   display: none;
 }
 
-.vano-image-uploader input[type=file] {
+.vano-image-uploader input[type='file'] {
   color: #ffffff00;
 }
 
@@ -74,7 +72,6 @@ body {
   font-size: 1rem;
 }
 
-
 .vano-image-uploader-trash-delete-icon {
   cursor: pointer;
 }
@@ -83,9 +80,45 @@ body {
   scale: 1.1;
 }
 
-
 .vano-parallax-inner {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+}
+
+.vano-watch-card {
+  background: rgba(255, 255, 255, 0.3);
+  padding: 10px;
+}
+
+.vano-watch-carousel {
+  margin: auto;
+  height: 250px;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+.vano-watch-carousel .carousel-inner {
+  width: 100%;
+  height: 100%;
+}
+
+.vano-watch-carousel .carousel-inner .carousel-item {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.vano-hero-content {
+  background-color: transparent;
+  margin: 50px 0px;
+  border: none;
+  color: white;
+}
+
+.vano-hero-content .card-title {
+  width: fit-content;
+  margin: 0 auto;
+  font-size: 60px;
 }

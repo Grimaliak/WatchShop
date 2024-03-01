@@ -24,7 +24,10 @@ apiWatchesRouter.post('/', upload.array('images', 10), async (req, res) => {
     if (!description) return res.status(400).json('Description is required');
     const watch = await Watch.create({ name, description });
     const images = await Image.bulkCreate(
-      files.map((file) => ({ path: 'uploaded-images/' + file.filename })),
+      files.map((file) => ({
+        path: 'uploaded-images/' + file.filename,
+        name: file.filename,
+      })),
     );
     await watch.addImages(images);
     const newWatch = await Watch.findByPk(watch.id, { include: Image });
@@ -38,6 +41,7 @@ apiWatchesRouter.post('/', upload.array('images', 10), async (req, res) => {
 apiWatchesRouter.put('/:id', upload.array('images', 10), async (req, res) => {
   try {
     const files = req.files;
+    console.log(files);
     const { id } = req.params;
     const { name, description } = req.body;
     const watch = await Watch.findByPk(id, { include: Image });
@@ -46,7 +50,10 @@ apiWatchesRouter.put('/:id', upload.array('images', 10), async (req, res) => {
     if (!description) return res.status(400).json('Description is required');
     await Promise.all(watch.Images.map((image) => image.destroy()));
     const images = await Image.bulkCreate(
-      files.map((file) => ({ path: 'uploaded-images/' + file.filename })),
+      files.map((file) => ({
+        path: 'uploaded-images/' + file.filename,
+        name: file.filename,
+      })),
     );
     Object.assign(watch, { name, description });
     await watch.save();

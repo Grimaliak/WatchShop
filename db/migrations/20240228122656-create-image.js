@@ -12,6 +12,9 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      name: {
+        type: Sequelize.STRING,
+      },
       watch_id: {
         type: Sequelize.INTEGER,
         references: {
