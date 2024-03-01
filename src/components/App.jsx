@@ -3,7 +3,7 @@ import NavBar from './ui/NavBar';
 import Footer from './ui/Contact';
 import { IconContext } from 'react-icons';
 import { ToastContainer } from 'react-toastify';
-import { Parallax } from 'react-parallax';
+import { Parallax, ParallaxBanner, ParallaxProvider } from 'react-scroll-parallax';
 
 const backgroundImage = 'background.jpeg';
 
@@ -20,7 +20,21 @@ export default function App({ children, user }) {
 
   return (
     <IconContext.Provider value={{ className: 'react-icon' }}>
-      <div
+      <ParallaxProvider>
+        <div style={{ position: 'relative' }}>
+          <div style={{ position: 'absolute', top: 0, left: 0, height: '100%', width: '100%', overflow: 'hidden' }}>
+            <Parallax speed={-50} style={{ position: 'absolute', top: 0, left: 0, width: '100%' }}>
+              <img src={backgroundImage} style={{ width: '100%', height: '100%', filter: 'blur(5px)' }} />
+            </Parallax>
+          </div>
+          <div style={{ position: 'relative' }}>
+            <NavBar user={user} />
+            {children}
+            <Footer />
+          </div>
+        </div>
+      </ParallaxProvider>
+      {/* <div
         style={{
           minHeight: '100dvh',
           display: 'flex',
@@ -46,8 +60,8 @@ export default function App({ children, user }) {
             <Footer />
           </Parallax>
         )}
-        <ToastContainer />
-      </div>
+      </div> */}
+      <ToastContainer />
     </IconContext.Provider>
   );
 }

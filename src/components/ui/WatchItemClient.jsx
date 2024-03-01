@@ -5,7 +5,7 @@ export default function WatchItemClient({ watch }) {
   return (
     <Card className="vano-watch-card">
       <Stack direction="horizontal" gap={2}>
-        <Carousel className="vano-watch-carousel" interval={null}>
+        <Carousel className="vano-watch-carousel" interval={4000}>
           {watch.Images.map((image) => (
             <Carousel.Item key={image.path}>
               <img
@@ -19,15 +19,12 @@ export default function WatchItemClient({ watch }) {
         <div
           style={{flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', overflow: 'hidden' }}
         >
-          <Card.Body style={{ textAlign: 'center', overflow: 'auto' }}>
+          <Card.Body style={{ textAlign: 'center', overflow: 'auto', color: 'white' }}>
             <Card.Title style={{ fontFamily: 'Cinzel, serif', fontSize: '50px', marginBottom: "20px" }}>{watch.name}</Card.Title>
-            <Card.Text className="sanya-description-card">sdfghjdfghjksdfghjkdfghjkdsfghjkfghjfghjkdfghjdfghjkdfghjxcvbnmdfghjikdfghjkdfghjkdfghjkdfghjkdcfvghjdcfvghjxdcfvghjdfghjiedrftgyhuifghjkldcfvghjkcfghj</Card.Text>
+            <Card.Text className="sanya-description-card">{watch.description}</Card.Text>
           </Card.Body>
         </div>
       </Stack>
     </Card>
   );
 }
-
-
-// {watch.description}

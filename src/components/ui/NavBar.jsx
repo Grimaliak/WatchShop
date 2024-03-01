@@ -9,9 +9,8 @@ export default function NavBar({ user }) {
       <Container>
         <Navbar.Brand href="/">WatchShop</Navbar.Brand>
         <Nav className="me-auto">
-          <Nav.Link href="#home">Якорь 1</Nav.Link>
-          <Nav.Link href="#features">Якорь 2</Nav.Link>
-          <Nav.Link href="#pricing">Якорь 3</Nav.Link>
+          <Nav.Link href="#">Watch list</Nav.Link>
+          <Nav.Link href="#">Client contacts</Nav.Link>
         </Nav>
         {user && (
           <Nav.Link href="/admin-logout">Logout</Nav.Link>

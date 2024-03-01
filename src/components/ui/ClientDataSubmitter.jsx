@@ -28,7 +28,7 @@ export default function ClientDataSubmitter(props) {
   };
 
   return (
-    <div {...props}>
+    <div {...props} id="client-contacts" style={{ ...props?.style, position: 'relative' }}>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="name">
           <Form.Label>Name</Form.Label>

@@ -53,7 +53,7 @@ export default function WatchList({ editable, watches: initialWatches }) {
   };
 
   return (
-    <Stack direction="vertical" gap={3}>
+    <Stack direction="vertical" gap={3} id="watch-list">
       {editable ? (
         <>
           <Stack direction="vertical" gap={3} className="my-3">
